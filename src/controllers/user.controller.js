@@ -1,5 +1,6 @@
 const userModel=require('../models/user.model')
 const bcrypt=require("bcryptjs")
+const jwt=require("jsonwebtoken")
 
 
 async function registerUser(req,res){
@@ -24,9 +25,19 @@ async function registerUser(req,res){
         password:hash,
        })
 
-       res.status(201).json({
+    
+       const token=jwt.sign({
+        id:user._id},
+    process.env.JWT_SECRET)
+
+
+res.cookie("token",token)
+
+ res.status(201).json({
         message:"User registed Successfully",user
        })
-}
+
+    }
+
 
 module.exports={registerUser}
