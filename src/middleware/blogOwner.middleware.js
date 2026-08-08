@@ -19,12 +19,10 @@ function getErrorMessage(req) {
       {
         return "You cannot delete this blog";
       }
-      break;
     case "PUT":
       {
         return "You cannot update this blog";
       }
-      break;
   }
 
 }
