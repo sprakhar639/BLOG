@@ -40,6 +40,7 @@ async function updateBlogById(req,res){
 
 async function deleteBlogById(req,res){
     const {id}=req.params
+     console.log("Deleting blog id:", id);
     const blog=await blogModel.findByIdAndDelete(id)
      if (!blog) {
         return res.status(404).json({
