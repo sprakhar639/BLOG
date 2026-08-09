@@ -3,7 +3,7 @@ const userModel = require("../models/user.model");
 async function getMyProfile(req, res) {
 
  
-  const user = await userModel.findOne(req.user.id);
+  const user = await userModel.findById(req.user.id);
 
    if (!user) {
         return res.status(404).json({
