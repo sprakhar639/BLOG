@@ -11,10 +11,8 @@ async function getMyProfile(req, res) {
         });
     }
 
-   const userObj=user.toObject()
-        delete userObj.password
         res.status(200).json({
-            user:userObj
+            user
         })
 }
 

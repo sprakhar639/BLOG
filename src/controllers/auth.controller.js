@@ -30,13 +30,13 @@ async function registerUser(req, res) {
   );
 
   res.cookie("token", token);
-  const userObj = user.toObject();
+   const userObj=user.toObject()
+   delete userObj.password
 
-  delete userObj.password;
 
   res.status(201).json({
     message: "User registed Successfully",
-    user: userObj,
+    user:userObj
   });
 }
 
@@ -65,18 +65,11 @@ async function loginUser(req, res) {
   );
   res.cookie("token", token);
 
-  //     password: {
-  //     type: String,
-  //     required: true,
-  //     select: false
-  //     }
-  //     const user = await userModel.findOne({ email }).select("+password");
-
-  const userObj = user.toObject();
-  delete userObj.password;
+   const userObj=user.toObject()
+    delete userObj.password
   res.status(200).json({
     message: "Logged In Successfully",
-    user: userObj,
+      user:userObj
   });
 }
 
