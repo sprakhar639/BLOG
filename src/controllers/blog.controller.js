@@ -21,8 +21,13 @@ async function getAllBlogs(req,res){
 
 async function getBlogById(req,res){
     const {id}=req.params;
+
     const blog=await blogModel.findById(id)
-    res.status(201).json({
+
+    if(!blog){
+        return res.status(404).json({message:"Cannot find blog"})
+    }
+    res.status(200).json({
         message:"Blog by id fetched successfully",
         blog
     })

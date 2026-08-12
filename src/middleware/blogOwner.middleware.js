@@ -6,7 +6,7 @@ async function blogOwnerUser(req, res, next) {
   const blogId = req.params.id;
   const userId = req.user.id;
   const blogDetails = await blogModel.findById(blogId);
-  if (userId != blogDetails.authorId) {
+  if (userId !== blogDetails.authorId) {
     const errorMessage = getErrorMessage(req);
     return res.status(401).json({ errorMessage });
   }
