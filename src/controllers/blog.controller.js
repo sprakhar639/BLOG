@@ -11,9 +11,10 @@ async function createBlog(req,res){
    })
 }
 
+
 async function getAllBlogs(req,res){
     const blogs=await blogModel.find()
-    res.status(201).json({
+    res.status(200).json({
         message:"All blogs fetched successfully",
         blogs
     })
@@ -37,7 +38,13 @@ async function updateBlogById(req,res){
     const {title,content}=req.body
     const {id}=req.params
     const blog=await blogModel.findByIdAndUpdate(id,{title,content},{new:true})
-    res.status(201).json({
+
+    if (!blog) {
+        return res.status(404).json({
+            message: "Blog not found"
+        });
+    }
+    res.status(200).json({
         message:"Blog Updated Successfully",
         blog
     })
@@ -53,7 +60,7 @@ async function deleteBlogById(req,res){
         });
     }
     res.status(200).json({
-        message:"Blog deleted Successfully",
+        message:"Blog deleted Successfully"
     })
 
 

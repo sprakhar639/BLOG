@@ -2,7 +2,8 @@ const userModel = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-async function registerUser(req, res) {
+async function registerUser(req,res,next) {
+  try{
   const { username, email, password } = req.body;
 
   const isUserAlreadyExists = await userModel.findOne({
@@ -39,8 +40,13 @@ async function registerUser(req, res) {
     user:userObj
   });
 }
+catch(error){
+  next(error)
+}
+}
 
-async function loginUser(req, res) {
+async function loginUser(req, res,next) {
+  try{
   const { username, email, password } = req.body;
 
   const user = await userModel
@@ -71,6 +77,9 @@ async function loginUser(req, res) {
     message: "Logged In Successfully",
       user:userObj
   });
+}catch(error){
+  next(error)
+}
 }
 
 async function logOutUser(req, res) {
@@ -78,13 +87,5 @@ async function logOutUser(req, res) {
   res.status(201).json({ message: "Logged Out Successfully" });
 }
 
-async function getUser(req, res) {
-  const id=req.params.id
-  const user = await userModel.findOne({
-    $or: [{ _id:id }],
-  });
-  console.log({ user });
-  res.status(201).json({ messsage: "got user", user });
-}
 
-module.exports = { registerUser, loginUser, logOutUser, getUser };
+module.exports = { registerUser, loginUser, logOutUser};
