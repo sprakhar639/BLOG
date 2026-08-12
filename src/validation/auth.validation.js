@@ -11,18 +11,13 @@ function validationRegister(req, res, next) {
     });
   }
 
-  if (username.length < 3) {
+  if (username.length < 3 || username.length > 8) {
     return res
       .status(400)
-      .json({ message: "Username must be atleast 3 characters" });
+      .json({ message: "Username must be greater than 3 and less than 8 character" });
   }
 
-  if (username.length > 8) {
-    return res
-      .status(400)
-      .json({ message: "Username must be less than 8 characters" });
-  }
-
+ 
   if (!password) {
     return res.status(400).json({ message: "Password required" });
   }
