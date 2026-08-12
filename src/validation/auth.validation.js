@@ -2,7 +2,7 @@ function validationRegister(req, res, next) {
   const { username, email, password } = req.body;
 
   if (!username || !email) {
-    return res.status(400).json({ message: "Username and email is required" });
+    return res.status(400).json({ message: "Username and email are required" });
   }
 
   if (!email.includes("@") || !email.includes(".")) {
@@ -14,13 +14,13 @@ function validationRegister(req, res, next) {
   if (username.length < 3) {
     return res
       .status(400)
-      .json({ message: "Username must be atleast more than 3 characters" });
+      .json({ message: "Username must be atleast 3 characters" });
   }
 
   if (username.length > 8) {
     return res
       .status(400)
-      .json({ message: "Username must be less than 9 characters" });
+      .json({ message: "Username must be less than 8 characters" });
   }
 
   if (!password) {
