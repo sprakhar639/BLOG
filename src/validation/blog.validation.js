@@ -1,11 +1,21 @@
-function contentValidation(req,res,next){
-      const {content}=req.body
+function createValidation(req,res,next){
+      const {title,content}=req.body
+
+      if(!title || !title.trim()){
+       return res.status(400).json({message:"Title Cannot be Empty"})
+    }
+    
+    if(title.trim().length<5){
+          return res.status(400).json({message:"Title should have atleast 5 Characters"})
+
+      }
      if (!content || !content.trim()){
         return res.status(400).json({message:"Blog content cannot be empty"})
-     }
-     if(content.trim().length<10){
+    }
+    if(content.trim().length<10){
         return res.status(400).json({message:"content must be at least 10 characters"})
-     }
+    }
+    
      next()
 }
 
@@ -33,4 +43,4 @@ function updateValidation(req,res,next){
     next()
 }
 
-module.exports={contentValidation,updateValidation}
+module.exports={createValidation,updateValidation}

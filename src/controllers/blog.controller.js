@@ -31,7 +31,7 @@ async function getBlogById(req,res){
 async function updateBlogById(req,res){
     const {title,content}=req.body
     const {id}=req.params
-    const blog=await blogModel.findByIdAndUpdate(id,{content},{new:true})
+    const blog=await blogModel.findByIdAndUpdate(id,{title,content},{new:true})
     res.status(201).json({
         message:"Blog Updated Successfully",
         blog
