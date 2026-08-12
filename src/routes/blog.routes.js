@@ -9,10 +9,10 @@ const {createValidation,updateValidation}=require('../validation/blog.validation
 const router=express.Router()
 
 
-router.post("/",createValidation,authMiddleware.authMiddleware,blogController.createBlog)
+router.post("/",authMiddleware.authMiddleware,createValidation,blogController.createBlog)
 router.get("/",authMiddleware.authMiddleware,blogController.getAllBlogs)
 router.get("/:id",authMiddleware.authMiddleware,blogController.getBlogById)
-router.put("/:id",updateValidation,authMiddleware.authMiddleware,blogOwnerMiddleware.blogOwnerUser,blogController.updateBlogById)
+router.put("/:id",authMiddleware.authMiddleware,updateValidation,blogOwnerMiddleware.blogOwnerUser,blogController.updateBlogById)
 router.delete("/:id",authMiddleware.authMiddleware,blogOwnerMiddleware.blogOwnerUser,blogController.deleteBlogById)
 
 module.exports=router

@@ -79,8 +79,9 @@ async function logOutUser(req, res) {
 }
 
 async function getUser(req, res) {
+  const id=req.params.id
   const user = await userModel.findOne({
-    $or: [{ _id }],
+    $or: [{ _id:id }],
   });
   console.log({ user });
   res.status(201).json({ messsage: "got user", user });
