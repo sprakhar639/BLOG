@@ -1,69 +1,96 @@
-const blogModel=require('../models/blog.model')
+const blogModel = require("../models/blog.model");
 
+async function createBlog(req, res, next) {
+  try {
+    const { title, content } = req.body;
+    const authorId = req.user.id;
+    const blog = await blogModel.create({ title, content, authorId });
 
-async function createBlog(req,res){
-   const{title,content}=req.body;
-   const authorId=req.user.id
-   const blog=await blogModel.create({title,content,authorId})
-
-   res.status(201).json({
-    message:"Blog Created Successfully",blog
-   })
+    res.status(201).json({
+      message: "Blog Created Successfully",
+      blog,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-
-async function getAllBlogs(req,res){
-    const blogs=await blogModel.find()
+async function getAllBlogs(req, res, next) {
+  try {
+    const blogs = await blogModel.find();
     res.status(200).json({
-        message:"All blogs fetched successfully",
-        blogs
-    })
+      message: "All blogs fetched successfully",
+      blogs,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-async function getBlogById(req,res){
-    const {id}=req.params;
+async function getBlogById(req, res, next) {
+  try {
+    const { id } = req.params;
 
-    const blog=await blogModel.findById(id)
-
-    if(!blog){
-        return res.status(404).json({message:"Cannot find blog"})
-    }
-    res.status(200).json({
-        message:"Blog by id fetched successfully",
-        blog
-    })
-}
-
-async function updateBlogById(req,res){
-    const {title,content}=req.body
-    const {id}=req.params
-    const blog=await blogModel.findByIdAndUpdate(id,{title,content},{new:true})
+    const blog = await blogModel.findById(id);
 
     if (!blog) {
-        return res.status(404).json({
-            message: "Blog not found"
-        });
+      return res.status(404).json({ message: "Cannot find blog" });
     }
     res.status(200).json({
-        message:"Blog Updated Successfully",
-        blog
-    })
+      message: "Blog by id fetched successfully",
+      blog,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-async function deleteBlogById(req,res){
-    const {id}=req.params
-     console.log("Deleting blog id:", id);
-    const blog=await blogModel.findByIdAndDelete(id)
-     if (!blog) {
-        return res.status(404).json({
-            message: "Blog not found"
-        });
+async function updateBlogById(req, res, next) {
+  try {
+    const { title, content } = req.body;
+    const { id } = req.params;
+    const blog = await blogModel.findByIdAndUpdate(
+      id,
+      { title, content },
+      { new: true },
+    );
+
+    if (!blog) {
+      return res.status(404).json({
+        message: "Blog not found",
+      });
     }
     res.status(200).json({
-        message:"Blog deleted Successfully"
-    })
-
-
+      message: "Blog Updated Successfully",
+      blog,
+    });
+  } catch (error) {
+    next(error);
+  }
 }
 
-module.exports={createBlog,getAllBlogs,getBlogById,updateBlogById,deleteBlogById}
+async function deleteBlogById(req, res, next) {
+  try {
+    const { id } = req.params;
+    console.log("Deleting blog id:", id);
+    const blog = await blogModel.findByIdAndDelete(id);
+    if (!blog) {
+      return res.status(404).json({
+        message: "Blog not found",
+      });
+    }
+    res.status(200).json({
+      message: "Blog deleted Successfully",
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+module.exports = {
+  createBlog,
+  getAllBlogs,
+  getBlogById,
+  updateBlogById,
+  deleteBlogById,
+};
