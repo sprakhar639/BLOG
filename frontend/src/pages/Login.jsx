@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/axios";
 
@@ -42,6 +43,10 @@ const handleLogin = async (event)=> {
         />
 
         <button type="submit">Login</button>
+        <p>
+          Don't have an account?
+          <Link to="/register">Register</Link>
+        </p>
       </form>
     </div>
   );

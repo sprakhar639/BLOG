@@ -1,5 +1,7 @@
 import {useState} from 'react'
 import api from '../api/axios'
+import {Link} from 'react-router-dom'
+
 
 function Register(){
     const [email,setEmail]=useState("")
@@ -48,6 +50,9 @@ function Register(){
         />
 
         <button type="submit">Register</button>
+        <p>Login 
+        <Link to="/login">Login</Link>
+        </p>
       </form>
     </div>
   );
