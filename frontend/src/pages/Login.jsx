@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import api from "../api/axios";
 
 function Login() {
+    const navigate =useNavigate()
   const [identifier, setIdentifier] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,9 +12,8 @@ const handleLogin = async (event)=> {
   try {
     const data=identifier.includes("@")?{email:identifier,password}:{username:identifier,password};
     const response = await api.post("/auth/login",data);
-
-    console.log("SUCCESS:", response.data);
     alert(response.data.message);
+    navigate("/")
   } catch (error) {
     console.log("STATUS:", error.response?.status);
     console.log("DATA:", error.response?.data);

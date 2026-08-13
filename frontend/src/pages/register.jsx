@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import api from '../api/axios'
 import {Link} from 'react-router-dom'
-
+import {useNavigation} from 'react-router-dom'
 
 function Register(){
     const [email,setEmail]=useState("")
