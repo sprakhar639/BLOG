@@ -1,0 +1,50 @@
+import { useState } from "react";
+import api from "../api/axios";
+
+function Login() {
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+
+const handleLogin = async (event)=> {
+    event.preventDefault();
+  try {
+    const data=identifier.includes("@")?{email:identifier,password}:{username:identifier,password};
+    const response = await api.post("/auth/login",data);
+
+    console.log("SUCCESS:", response.data);
+    alert(response.data.message);
+  } catch (error) {
+    console.log("STATUS:", error.response?.status);
+    console.log("DATA:", error.response?.data);
+    console.log("FULL ERROR:", error);
+
+    alert(error.response?.data?.message || error.message);
+  }
+};
+
+  return (
+    <div>
+      <h1>Login</h1>
+
+      <form onSubmit={handleLogin}>
+        <input
+          type="text"
+          placeholder="Username or Email"
+          value={identifier}
+          onChange={(e) => setIdentifier(e.target.value)}
+        />
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  );
+}
+
+export default Login;
