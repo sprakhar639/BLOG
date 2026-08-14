@@ -3,8 +3,8 @@ const blogModel = require("../models/blog.model");
 async function createBlog(req, res, next) {
   try {
     const { title, content } = req.body;
-    const authorId = req.user.id;
-    const blog = await blogModel.create({ title, content, authorId });
+    const author = req.user.id;
+    const blog = await blogModel.create({ title, content, author });
 
     res.status(201).json({
       message: "Blog Created Successfully",
@@ -31,7 +31,7 @@ async function getBlogById(req, res, next) {
   try {
     const { id } = req.params;
 
-    const blog = await blogModel.findById(id);
+    const blog = await blogModel.findById(id).populate("author","username");
 
     if (!blog) {
       return res.status(404).json({ message: "Cannot find blog" });

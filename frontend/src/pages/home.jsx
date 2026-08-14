@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axios";
+import { Link } from "react-router-dom";
 
 function Home() {
   const [blogs, setBlogs] = useState([]);
@@ -8,7 +9,6 @@ function Home() {
     const getBlogs = async () => {
       try {
         const response = await api.get("/blog/");
-        console.log("API RESPONSE:", response.data);
         setBlogs(response.data.blogs);
       } catch (error) {
         console.log(error);
@@ -24,7 +24,9 @@ function Home() {
 
       {blogs.map((blog) => (
         <div key={blog._id}>
-          <h2>{blog.title}</h2>
+          <Link to={`/blog/${blog._id}`}>
+            <h2>{blog.title}</h2>
+          </Link>
           <p>{blog.content}</p>
         </div>
       ))}
