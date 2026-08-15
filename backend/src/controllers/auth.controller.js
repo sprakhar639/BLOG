@@ -10,8 +10,16 @@ async function registerUser(req,res,next) {
     $or: [{ username }, { email }],
   });
   if (isUserAlreadyExists) {
+  if (isUserAlreadyExists.username === username) {
     return res.status(409).json({
-      message: "User Already Exist",
+      message: "Username already exists",
+    });
+  }
+}
+
+  if (isUserAlreadyExists.email === email) {
+    return res.status(409).json({
+      message: "Email already exists",
     });
   }
 
