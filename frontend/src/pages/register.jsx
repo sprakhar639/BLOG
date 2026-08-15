@@ -1,9 +1,10 @@
 import {useState} from 'react'
 import api from '../api/axios'
 import {Link} from 'react-router-dom'
-import {useNavigation} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 
 function Register(){
+  const navigate =useNavigate()
     const [email,setEmail]=useState("")
     const [username,setUsername]=useState("")
     const [password,setPassword]=useState("")
@@ -14,6 +15,7 @@ function Register(){
     try{
        const  response=await api.post("/auth/register",{email,username,password});
        alert(response.data.message);
+       navigate("/")
     }
     catch(error){
         alert(error.response?.data?.message || error.message);

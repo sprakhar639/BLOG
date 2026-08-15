@@ -1,11 +1,12 @@
 import api from '../api/axios'
 import {useState,useEffect} from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams,Link,useNavigate} from 'react-router-dom'
 
 
 
 
 function BlogDetails(){
+     const navigate=useNavigate()
     const {id} = useParams();
 
 
@@ -37,6 +38,9 @@ function BlogDetails(){
       <p>BLog Title:{blog.title}</p>
       <p>BLog Content:{blog.content}</p>
       <p>BLog Author:{blog.author.username}</p>
+    <button onClick={() => navigate(`/blog/${blog._id}/edit`)}>
+  Edit Blog
+</button>
     </div>
   );
 }
