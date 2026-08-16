@@ -4,7 +4,9 @@ async function blogOwnerUser(req, res, next) {
   const blogId = req.params.id;
   const userId = req.user.id;
   const blogDetails = await blogModel.findById(blogId);
-  if (userId !== blogDetails.author) {
+  console.log(userId)
+  console.log(blogDetails.author)
+  if (userId.toString() !== blogDetails.author.toString()) {
     const errorMessage = getErrorMessage(req);
     return res.status(401).json({ errorMessage });
   }
