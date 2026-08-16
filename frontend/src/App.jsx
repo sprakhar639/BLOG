@@ -5,6 +5,7 @@ import Home from "./pages/home";
 import BlogDetails from "./pages/blogDetails";
 import EditBlog from "./pages/editBlog"
 
+
 function App() {
   return (
     <BrowserRouter>
