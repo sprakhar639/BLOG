@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
 import api from "../api/axios";
 import { Link } from "react-router-dom";
 
@@ -18,6 +19,20 @@ function Home() {
     getBlogs();
   }, []);
 
+
+
+    
+const navigate=useNavigate()
+    const handleLogout = async () => {
+  try {
+    const response =await api.post("/auth/logout");
+    alert(response.data.message)
+    navigate("/login");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
   return (
     <div>
       <h1>All Blogs</h1>
@@ -30,6 +45,9 @@ function Home() {
           <p>{blog.content}</p>
         </div>
       ))}
+       <button onClick={handleLogout}>
+  Log Out
+</button>
     </div>
   );
 }

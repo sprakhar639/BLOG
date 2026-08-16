@@ -29,6 +29,8 @@ function BlogDetails(){
     if(!blog){
         return <h2>Loading...</h2>
     }
+
+
   
 
   return (
