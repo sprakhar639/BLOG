@@ -15,10 +15,6 @@ const handleLogin = async (event)=> {
     alert(response.data.message);
     navigate("/")
   } catch (error) {
-    console.log("STATUS:", error.response?.status);
-    console.log("DATA:", error.response?.data);
-    console.log("FULL ERROR:", error);
-
     alert(error.response?.data?.message || error.message);
   }
 };

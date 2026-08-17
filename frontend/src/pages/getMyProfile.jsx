@@ -4,13 +4,13 @@ function MyProfile() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/user/me", {
-      credentials: "include",
-    })
-      .then(res => res.json())
-      .then(data =>setUser(data.user))
-      .catch(error => console.log(error));
-  }, []);
+
+const fetchBlog =async ()=>{
+
+    const response = await api.get("/user/me");
+setUser(response.data.user);
+}
+  fetchBlog();}, []);
 
   return (
     <>

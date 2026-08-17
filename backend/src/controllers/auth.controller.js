@@ -15,13 +15,14 @@ async function registerUser(req,res,next) {
       message: "Username already exists",
     });
   }
-}
+
 
   if (isUserAlreadyExists.email === email) {
     return res.status(409).json({
       message: "Email already exists",
     });
   }
+}
 
   const hash = await bcrypt.hash(password, 10);
 
@@ -63,8 +64,6 @@ async function loginUser(req, res,next) {
   if (!user) {
     return res.status(401).json({ message: "User not exists" });
   }
-
-  console.log("after select", { user });
   const isPasswordValid = await bcrypt.compare(password, user.password);
 
   if (!isPasswordValid) {

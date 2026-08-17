@@ -8,6 +8,7 @@ function BlogDetails() {
 
   const [blog, setBlog] = useState(null);
   const [user, setuser] = useState(null);
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchBlog = async () => {
@@ -15,16 +16,24 @@ function BlogDetails() {
         const blogresponse = await api.get(`/blog/${id}`);
         setBlog(blogresponse.data.blog);
 
-        const userresponse = await api.get(`./user/me`);
+        const userresponse = await api.get(`/user/me`);
         setuser(userresponse.data.user);
       } catch (error) {
-        console.log(error);
+         if (error.response?.status === 404) {
+        alert("Blog not found");
+        navigate("/");
+        return;
       }
+
+      alert(error.response?.data?.message || error.message);
+    } finally {
+      setLoading(false);
+    }
     };
     fetchBlog();
   }, [id]);
 
-  if (!blog ||!user) {
+  if (loading) {
     return <h2>Loading...</h2>;
   }
 

@@ -72,7 +72,6 @@ async function updateBlogById(req, res, next) {
 async function deleteBlogById(req, res, next) {
   try {
     const { id } = req.params;
-    console.log("Deleting blog id:", id);
     const blog = await blogModel.findByIdAndDelete(id);
     if (!blog) {
       return res.status(404).json({

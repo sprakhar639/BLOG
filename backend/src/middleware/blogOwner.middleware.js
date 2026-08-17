@@ -4,8 +4,10 @@ async function blogOwnerUser(req, res, next) {
   const blogId = req.params.id;
   const userId = req.user.id;
   const blogDetails = await blogModel.findById(blogId);
-  console.log(userId)
-  console.log(blogDetails.author)
+  if(!blogDetails){
+    return res.status(404).json({message:"Blog not exist"})
+  }
+
   if (userId.toString() !== blogDetails.author.toString()) {
     const errorMessage = getErrorMessage(req);
     return res.status(403).json({ errorMessage });

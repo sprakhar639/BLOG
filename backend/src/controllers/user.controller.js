@@ -26,7 +26,7 @@ async function getUser(req, res, next) {
     if (!user) {
       return res.status(200).json({ message: "User Not Found" });
     }
-    res.status(201).json({ messsage: "Got user", user });
+    res.status(200).json({ messsage: "Got user", user });
   } catch (error) {
     next(error);
   }

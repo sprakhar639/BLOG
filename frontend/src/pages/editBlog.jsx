@@ -21,7 +21,7 @@ function editBlog() {
     setContent(blog.content)
     }
     catch(error){
-         alert(error.response.data.message);
+        alert(error.response?.data?.message || error.message);
     }
  }
 fetchBlog();

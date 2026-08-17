@@ -12,7 +12,7 @@ function Home() {
         const response = await api.get("/blog/");
         setBlogs(response.data.blogs);
       } catch (error) {
-        console.log(error);
+        alert(error.response?.data?.message || error.message);
       }
     };
 
@@ -29,7 +29,7 @@ const navigate=useNavigate()
     alert(response.data.message)
     navigate("/login");
   } catch (error) {
-    console.log(error);
+   alert(error.response?.data?.message || error.message);
   }
 };
 
