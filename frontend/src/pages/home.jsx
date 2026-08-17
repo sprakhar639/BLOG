@@ -33,6 +33,7 @@ const navigate=useNavigate()
   }
 };
 
+
   return (
     <div>
       <h1>All Blogs</h1>
@@ -45,6 +46,7 @@ const navigate=useNavigate()
           <p>{blog.content}</p>
         </div>
       ))}
+    <Link to="/MyProfile"><button>Profile</button></Link>
        <button onClick={handleLogout}>
   Log Out
 </button>

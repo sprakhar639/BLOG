@@ -51,9 +51,7 @@ function Register(){
         />
 
         <button type="submit">Register</button>
-        <p>Login 
-        <Link to="/login">Login</Link>
-        </p>
+       <p> <Link to="/login">Login</Link></p>
       </form>
     </div>
   );

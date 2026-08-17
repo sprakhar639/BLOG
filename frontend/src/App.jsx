@@ -4,6 +4,7 @@ import Register from "./pages/register";
 import Home from "./pages/home";
 import BlogDetails from "./pages/blogDetails";
 import EditBlog from "./pages/editBlog"
+import GetProfile from "./pages/getMyProfile"
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/blog/:id" element={<BlogDetails/>} />
         <Route path="/blog/:id/edit" element={<EditBlog/>} />
+        <Route path="/MyProfile" element={<GetProfile/>} />
 
       </Routes>
     </BrowserRouter>
