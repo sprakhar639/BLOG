@@ -7,13 +7,16 @@ function BlogDetails() {
   const { id } = useParams();
 
   const [blog, setBlog] = useState(null);
+  const [user, setuser] = useState(null);
 
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const response = await api.get(`/blog/${id}`);
-        console.log(response.data.blog);
-        setBlog(response.data.blog);
+        const blogresponse = await api.get(`/blog/${id}`);
+        setBlog(blogresponse.data.blog);
+
+        const userresponse = await api.get(`./user/me`);
+        setuser(userresponse.data.user);
       } catch (error) {
         console.log(error);
       }
@@ -21,13 +24,12 @@ function BlogDetails() {
     fetchBlog();
   }, [id]);
 
-  if (!blog) {
+  if (!blog ||!user) {
     return <h2>Loading...</h2>;
   }
 
   const handleDelete = async () => {
     try {
-
       const response = await api.delete(`/blog/${id}`);
       alert(response.data.message);
       navigate("/");
@@ -43,10 +45,14 @@ function BlogDetails() {
       <p>BLog Title:{blog.title}</p>
       <p>BLog Content:{blog.content}</p>
       <p>BLog Author:{blog.author.username}</p>
-      <button onClick={() => navigate(`/blog/${blog._id}/edit`)}>
-        Edit Blog
-      </button>
-      <button onClick={handleDelete}>Delete Blog</button>
+      {user._id === blog.author._id &&(
+          <>
+            <button onClick={() => navigate(`/blog/${blog._id}/edit`)}>
+              Edit Blog
+            </button>
+            <button onClick={handleDelete}>Delete Blog</button>
+          </>
+        )}
     </div>
   );
 }
