@@ -47,9 +47,11 @@ const navigate=useNavigate()
         </div>
       ))}
     <Link to="/MyProfile"><button>Profile</button></Link>
+    <Link to ="/CreateBlog"><button>Create Blog</button></Link>
        <button onClick={handleLogout}>
   Log Out
 </button>
+
     </div>
   );
 }

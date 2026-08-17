@@ -32,7 +32,7 @@ function BlogDetails() {
       alert(response.data.message);
       navigate("/");
     } catch (error) {
-      alert(error.response?.data?.message || error.message);
+      alert(error.response?.data?.errorMessage || error.message);
     }
   };
 

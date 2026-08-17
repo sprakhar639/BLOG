@@ -21,7 +21,7 @@ function editBlog() {
     setContent(blog.content)
     }
     catch(error){
-         alert(error);
+         alert(error.response.data.message);
     }
  }
 fetchBlog();
@@ -37,7 +37,7 @@ const handleUpdate=async(event)=>{
     });
     navigate(`/blog/${id}`);
   }catch(error){
-    alert(error.response?.data?.message || error.message)
+    alert(error.response?.data?.errorMessage || error.message)
   }
 };
 return (
@@ -49,6 +49,7 @@ return (
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
+
 
       <textarea
         value={content}
