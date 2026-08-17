@@ -8,7 +8,7 @@ async function blogOwnerUser(req, res, next) {
   console.log(blogDetails.author)
   if (userId.toString() !== blogDetails.author.toString()) {
     const errorMessage = getErrorMessage(req);
-    return res.status(401).json({ errorMessage });
+    return res.status(403).json({ errorMessage });
   }
   next();
 }
